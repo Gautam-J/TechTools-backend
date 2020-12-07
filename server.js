@@ -1,7 +1,11 @@
 const express = require("express");
 const morgan = require("morgan");
+const connectToDB = require("./config/db");
 
 const app = express();
+
+// connect to MongoDB
+connectToDB();
 
 // Initialize Middlewares
 // logger => :method :url :status :response-time ms - :res[content-length]
