@@ -6,7 +6,7 @@ const Schema = mongoose.Schema;
 // create schema for model
 const PostSchema = new Schema(
   {
-    user: {
+    userId: {
       type: Schema.Types.ObjectId,
       ref: "users",
     },
@@ -39,7 +39,7 @@ const PostSchema = new Schema(
     },
     likes: [
       {
-        user: {
+        userId: {
           type: Schema.Types.ObjectId,
           ref: "users",
         },
@@ -47,34 +47,10 @@ const PostSchema = new Schema(
     ],
     comments: [
       {
-        user: {
+        commentId: {
           type: Schema.Types.ObjectId,
-          ref: "users",
+          ref: "comments",
         },
-        text: {
-          type: String,
-          required: true,
-        },
-        date: {
-          type: Date,
-          default: Date.now,
-        },
-        replies: [
-          {
-            user: {
-              type: Schema.Types.ObjectId,
-              ref: "users",
-            },
-            text: {
-              type: String,
-              required: true,
-            },
-            date: {
-              type: String,
-              default: Date.now,
-            },
-          },
-        ],
       },
     ],
   },
