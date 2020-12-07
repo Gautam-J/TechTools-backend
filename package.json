@@ -1,0 +1,11 @@
+{
+  "name": "techtools-backend",
+  "version": "1.0.0",
+  "description": "REST API for TechTools.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Gautam J",
+  "license": "MIT"
+}
