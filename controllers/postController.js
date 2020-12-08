@@ -76,6 +76,33 @@ const post_details = async (req, res) => {
     if (err.kind === "ObjectId") {
       return res.status(404).json({ errors: [{ msg: "Post not found" }] });
     }
+
+    res.status(500).send("Server error");
+  }
+};
+
+const post_delete = async (req, res) => {
+  try {
+    const post = await Post.findById(req.params.id);
+
+    // check for 404
+    if (!post) {
+      return res.status(404).json({ errors: [{ msg: "Post not found" }] });
+    }
+
+    // remove from MongoDB
+    await post.remove();
+
+    res.json({ success: [{ msg: "Post removed" }] });
+  } catch (err) {
+    console.log(err.message);
+
+    // check for 404
+    if (err.kind === "ObjectId") {
+      return res.status(404).json({ errors: [{ msg: "Post not found" }] });
+    }
+
+    res.status(500).send("Server error");
   }
 };
 
@@ -83,4 +110,5 @@ module.exports = {
   post_create,
   post_index,
   post_details,
+  post_delete,
 };

@@ -27,9 +27,14 @@ router.post(
 // @access Public
 router.get("/index", postController.post_index);
 
-// @route  GET api/posts/index
-// @desc   Get all posts
+// @route  GET api/posts/:id
+// @desc   Get post by Id
 // @access Public
 router.get("/:id", postController.post_details);
+
+// @route  DELETE api/posts/:id
+// @desc   Delete post by Id
+// @access Private
+router.delete("/:id", auth, postController.post_delete);
 
 module.exports = router;
