@@ -59,5 +59,6 @@ router.post(
 // @route  DELETE api/posts/uncomment/:id/:commentId
 // @desc   Delete comment by Id
 // @access Private
+router.delete("/uncomment/:id/:commentId", auth, postController.post_uncomment);
 
 module.exports = router;

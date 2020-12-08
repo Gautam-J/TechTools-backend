@@ -194,6 +194,43 @@ const post_comment = async (req, res) => {
   }
 };
 
+const post_uncomment = async (req, res) => {
+  try {
+    const post = await Post.findById(req.params.id);
+    const comment = post.comments.find(
+      (comment) => comment.id === req.params.commentId
+    );
+
+    // check if comment exists
+    if (!comment) {
+      return res
+        .status(404)
+        .json({ errors: [{ msg: "Comment does not exists" }] });
+    }
+
+    // check if user same as commented user
+    if (comment.userId.toString() !== req.user.id) {
+      return res.status(401).json({ errors: [{ msg: "User not authorized" }] });
+    }
+
+    // get index of commentId to be removed
+    const removeIndex = post.comments
+      .map((comment) => comment.userId.toString())
+      .indexOf(req.user.id);
+
+    // remove element in removeIndex
+    post.comments.splice(removeIndex, 1);
+
+    // save updated Post to MongoDB
+    await post.save();
+
+    res.json(post.comments);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server error");
+  }
+};
+
 module.exports = {
   post_create,
   post_index,
@@ -202,4 +239,5 @@ module.exports = {
   post_like,
   post_unlike,
   post_comment,
+  post_uncomment,
 };
