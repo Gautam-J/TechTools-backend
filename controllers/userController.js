@@ -102,7 +102,19 @@ const user_login = async (req, res) => {
   }
 };
 
+const user_verify = async (req, res) => {
+  try {
+    // get user instance except for hashed password
+    const user = await User.findById(req.user.id).select("-password");
+    res.json(user);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).status("Server error");
+  }
+};
+
 module.exports = {
   user_register,
   user_login,
+  user_verify,
 };

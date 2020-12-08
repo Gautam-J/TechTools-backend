@@ -1,6 +1,7 @@
 const express = require("express");
 const { check } = require("express-validator");
 const userController = require("../controllers/userController");
+const auth = require("../middleware/auth");
 
 const router = express.Router();
 
@@ -31,5 +32,10 @@ router.post(
   ],
   userController.user_login
 );
+
+// @route  GET api/users/verify
+// @desc   Verify logged in user
+// @access Private
+router.get("/verify", auth, userController.user_verify);
 
 module.exports = router;
