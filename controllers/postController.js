@@ -1,6 +1,6 @@
 const { validationResult } = require("express-validator");
 const Post = require("../models/Post");
-const Comment = require("../models/Comment");
+const User = require("../models/User");
 
 const post_create = async (req, res) => {
   // check for errors in request body according to check
@@ -171,19 +171,18 @@ const post_comment = async (req, res) => {
   }
 
   try {
+    const user = await User.findById(req.user.id).select("-password");
     const post = await Post.findById(req.params.id);
 
     // create new instance of Comment
-    const newComment = new Comment({
+    const newComment = {
       text: req.body.text,
       userId: req.user.id,
-    });
+      name: user.name,
+    };
 
-    // save instance to MongoDB
-    const comment = await newComment.save();
-
-    // update likes array in Post
-    post.comments.unshift({ commentId: comment._id });
+    // update comments array in Post
+    post.comments.unshift(newComment);
 
     // save updated Post to MongoDB
     await post.save();
