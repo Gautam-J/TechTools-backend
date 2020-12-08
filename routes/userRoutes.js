@@ -5,13 +5,13 @@ const userController = require("../controllers/userController");
 const router = express.Router();
 
 // @route  POST api/users/register
-// @desc   Register/create new user
+// @desc   Register or create new user
 // @access Public
 router.post(
   "/register",
   [
-    check("name", "Name is required").not().isEmpty(),
-    check("email", "Please include a valid email").isEmail(),
+    check("name", "Please enter your name").not().isEmpty(),
+    check("email", "Please enter a valid email").isEmail(),
     check(
       "password",
       "Please enter a password with 8 or more characters"
