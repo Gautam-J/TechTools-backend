@@ -22,4 +22,14 @@ router.post(
   postController.post_create
 );
 
+// @route  GET api/posts/index
+// @desc   Get all posts
+// @access Public
+router.get("/index", postController.post_index);
+
+// @route  GET api/posts/index
+// @desc   Get all posts
+// @access Public
+router.get("/:id", postController.post_details);
+
 module.exports = router;
