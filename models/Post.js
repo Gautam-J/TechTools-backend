@@ -13,14 +13,12 @@ const PostSchema = new Schema(
     title: {
       type: String,
       required: true,
+      unique: true,
     },
     link: {
       type: String,
       required: true,
-    },
-    date: {
-      type: String,
-      default: Date.now,
+      unique: true,
     },
     contentType: {
       type: String,
