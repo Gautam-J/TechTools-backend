@@ -106,9 +106,68 @@ const post_delete = async (req, res) => {
   }
 };
 
+const post_like = async (req, res) => {
+  try {
+    const post = await Post.findById(req.params.id);
+
+    // check if post has already been liked
+    if (
+      post.likes.filter((like) => like.userId.toString() === req.user.id)
+        .length > 0
+    ) {
+      return res.status(400).json({ errors: [{ msg: "Post already liked" }] });
+    }
+
+    // add userId to beginning of likes array
+    post.likes.unshift({ userId: req.user.id });
+
+    // save updated Post instance to MongoDB
+    await post.save();
+
+    res.json(post.likes);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server error");
+  }
+};
+
+const post_unlike = async (req, res) => {
+  try {
+    const post = await Post.findById(req.params.id);
+
+    // check if post has already been liked
+    if (
+      post.likes.filter((like) => like.userId.toString() === req.user.id)
+        .length === 0
+    ) {
+      return res
+        .status(400)
+        .json({ errors: [{ msg: "Post has not yet been liked" }] });
+    }
+
+    // get index of userId to be removed
+    const removeIndex = post.likes.map((like) =>
+      like.userId.toString().indexOf(req.user.id)
+    );
+
+    // remove element in removeIndex
+    post.likes.splice(removeIndex, 1);
+
+    // save updated Post instance to MongoDB
+    await post.save();
+
+    res.json(post.likes);
+  } catch (err) {
+    console.log(err.message);
+    res.status(500).send("Server error");
+  }
+};
+
 module.exports = {
   post_create,
   post_index,
   post_details,
   post_delete,
+  post_like,
+  post_unlike,
 };
