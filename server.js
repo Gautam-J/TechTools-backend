@@ -11,6 +11,7 @@ connectToDB();
 // logger => :method :url :status :response-time ms - :res[content-length]
 app.use(morgan("dev"));
 // parse incoming requests with JSON payloads
+// convert JSON to Js Objects
 app.use(express.json());
 
 // default empty route to check API

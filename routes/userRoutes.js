@@ -20,4 +20,16 @@ router.post(
   userController.user_register
 );
 
+// @route  POST api/users/login
+// @desc   Register or create new user
+// @access Public
+router.post(
+  "/login",
+  [
+    check("email", "Please enter a valid email").isEmail(),
+    check("password", "Please enter a password").exists(),
+  ],
+  userController.user_login
+);
+
 module.exports = router;
