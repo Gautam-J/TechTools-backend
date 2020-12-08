@@ -1,6 +1,5 @@
 const { validationResult } = require("express-validator");
 const Post = require("../models/Post");
-const User = require("../models/User");
 
 const post_create = async (req, res) => {
   // check for errors in request body according to check
