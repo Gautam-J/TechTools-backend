@@ -20,6 +20,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/users", require("./routes/userRoutes"));
+app.use("/api/posts", require("./routes/postRoutes"));
 
 // either PORT env variable or 5000
 const PORT = process.env.PORT || 5000;
