@@ -10,8 +10,7 @@ connectToDB();
 // Initialize Middlewares
 // logger => :method :url :status :response-time ms - :res[content-length]
 app.use(morgan("dev"));
-// parse incoming requests with JSON payloads
-// convert JSON to Js Objects
+// parse incoming JSON payloads and convert it to Js Objects
 app.use(express.json());
 
 // default empty route to check API
