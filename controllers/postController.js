@@ -1,5 +1,6 @@
 const { validationResult } = require("express-validator");
 const Post = require("../models/Post");
+const Comment = require("../models/Comment");
 
 const post_create = async (req, res) => {
   // check for errors in request body according to check
@@ -162,6 +163,38 @@ const post_unlike = async (req, res) => {
   }
 };
 
+const post_comment = async (req, res) => {
+  // check for errors in request body according to check
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+
+  try {
+    const post = await Post.findById(req.params.id);
+
+    // create new instance of Comment
+    const newComment = new Comment({
+      text: req.body.text,
+      userId: req.user.id,
+    });
+
+    // save instance to MongoDB
+    const comment = await newComment.save();
+
+    // update likes array in Post
+    post.comments.unshift({ commentId: comment._id });
+
+    // save updated Post to MongoDB
+    await post.save();
+
+    res.json(post.comments);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server error");
+  }
+};
+
 module.exports = {
   post_create,
   post_index,
@@ -169,4 +202,5 @@ module.exports = {
   post_delete,
   post_like,
   post_unlike,
+  post_comment,
 };
