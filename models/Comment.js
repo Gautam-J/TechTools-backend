@@ -14,19 +14,11 @@ const CommentSchema = new Schema(
       type: String,
       required: true,
     },
-    date: {
-      type: Date,
-      default: Date.now,
-    },
     replies: [
       {
         commentId: {
           type: Schema.Types.ObjectId,
           ref: "comments",
-        },
-        date: {
-          type: String,
-          default: Date.now,
         },
       },
     ],
