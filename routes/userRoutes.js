@@ -6,7 +6,7 @@ const auth = require("../middleware/auth");
 const router = express.Router();
 
 // @route  POST api/users/register
-// @desc   Register or create new user
+// @desc   Register new user
 // @access Public
 router.post(
   "/register",
@@ -22,7 +22,7 @@ router.post(
 );
 
 // @route  POST api/users/login
-// @desc   Register or create new user
+// @desc   Login user and return jwt
 // @access Public
 router.post(
   "/login",
