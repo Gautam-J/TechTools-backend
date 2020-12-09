@@ -27,6 +27,11 @@ router.post(
 // @access Public
 router.get("/index", postController.post_index);
 
+// @route  GET api/posts/user/:id
+// @desc   Get all posts by UserId
+// @access Public
+router.get("/user/:id", postController.post_userIndex);
+
 // @route  GET api/posts/:id
 // @desc   Get post by Id
 // @access Public

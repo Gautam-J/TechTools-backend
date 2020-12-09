@@ -24,6 +24,7 @@ REST API for TechTools using MongoDB, Express, Node.js
 
 - POST - `/create` - (Private) Create a new post
 - GET - `/index` - Get all posts
+- GET - `/user/:id` - Get all posts by userId
 - GET - `/:id` - Get post by Id
 - PUT - `/:id` - (Private) Update post by Id
 - DELETE - `/:id` - (Private) Delete post by Id
