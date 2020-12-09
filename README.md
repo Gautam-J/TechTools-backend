@@ -18,6 +18,7 @@ REST API for TechTools using MongoDB, Express, Node.js
 - POST - `/register` - Register new user
 - POST - `/login` - Login user and return JSONWebToken
 - GET - `/verify` - (Private) Verify user login and return User
+- DELETE - `/delete` - (Private) Delete user
 
 ### Post - `/api/posts`
 

@@ -38,4 +38,9 @@ router.post(
 // @access Private
 router.get("/verify", auth, userController.user_verify);
 
+// @route  DELETE api/users/delete
+// @desc   Delete logged in user
+// @access Private
+router.delete("/delete", auth, userController.user_delete);
+
 module.exports = router;

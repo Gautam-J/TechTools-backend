@@ -113,8 +113,26 @@ const user_verify = async (req, res) => {
   }
 };
 
+const user_delete = async (req, res) => {
+  try {
+    // remove User from MongoDB
+    await User.findOneAndRemove({ _id: req.user.id });
+
+    res.json({ success: [{ msg: "User deleted" }] });
+  } catch (err) {
+    console.error(err.message);
+
+    if (err.kind == "ObjectID") {
+      return res.status(400).json({ errors: [{ msg: "User not found" }] });
+    }
+
+    res.status(500).send("Server error");
+  }
+};
+
 module.exports = {
   user_register,
   user_login,
   user_verify,
+  user_delete,
 };
