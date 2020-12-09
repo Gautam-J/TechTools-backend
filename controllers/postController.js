@@ -90,6 +90,11 @@ const post_delete = async (req, res) => {
       return res.status(404).json({ errors: [{ msg: "Post not found" }] });
     }
 
+    // check if post by logged in user
+    if (post.userId.toString() !== req.user.id) {
+      return res.status(401).json({ errors: [{ msg: "User not authorized" }] });
+    }
+
     // remove from MongoDB
     await post.remove();
 
