@@ -32,6 +32,11 @@ router.get("/index", postController.post_index);
 // @access Public
 router.get("/:id", postController.post_details);
 
+// @route  PUT api/posts/:id
+// @desc   Update post by Id
+// @access Private
+router.put("/:id", auth, postController.post_update);
+
 // @route  DELETE api/posts/:id
 // @desc   Delete post by Id
 // @access Private

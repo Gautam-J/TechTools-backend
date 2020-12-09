@@ -81,6 +81,44 @@ const post_details = async (req, res) => {
   }
 };
 
+const post_update = async (req, res) => {
+  const { title, link, contentType, source, description } = req.body;
+
+  // create new fields object
+  const postFields = {};
+  if (title) postFields.title = title;
+  if (link) postFields.link = link;
+  if (contentType) postFields.contentType = contentType;
+  if (source) postFields.source = source;
+  if (description) postFields.description = description;
+
+  try {
+    let post = await Post.findById(req.params.id);
+
+    // check for 404
+    if (!post) {
+      return res.status(404).json({ errors: [{ msg: "Post not found" }] });
+    }
+
+    // check if post by logged in user
+    if (post.userId.toString() !== req.user.id) {
+      return res.status(401).json({ errors: [{ msg: "User not authorized" }] });
+    }
+
+    // Update instance in MongoDB
+    post = await Post.findOneAndUpdate(
+      { userId: req.user.id },
+      { $set: postFields },
+      { new: true }
+    );
+
+    return res.json(post);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server error");
+  }
+};
+
 const post_delete = async (req, res) => {
   try {
     const post = await Post.findById(req.params.id);
@@ -240,6 +278,7 @@ module.exports = {
   post_create,
   post_index,
   post_details,
+  post_update,
   post_delete,
   post_like,
   post_unlike,
