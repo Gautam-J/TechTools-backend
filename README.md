@@ -2,7 +2,18 @@
 
 REST API for TechTools using MongoDB, Express, Node.js
 
+Hosted [here](https://limitless-scrubland-55173.herokuapp.com/)
+
 ## Setup
+
+- Add the following code snippet in `./config/default.json`
+
+```json
+{
+  "mongoURI": "yourMongoURI",
+  "jwtSecret": "yourSecretKey"
+}
+```
 
 - `npm install` - Install all dependencies
 - `npm start` - Run the API server
