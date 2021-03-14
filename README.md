@@ -36,6 +36,7 @@ Hosted [here](https://limitless-scrubland-55173.herokuapp.com/)
 - POST - `/create` - (Private) Create a new post
 - GET - `/index` - Get all posts
 - GET - `/user/:id` - Get all posts by userId
+- GET - `/:contentType` - Get all posts by contentType
 - GET - `/:id` - Get post by Id
 - PUT - `/:id` - (Private) Update post by Id
 - DELETE - `/:id` - (Private) Delete post by Id
