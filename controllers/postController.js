@@ -71,6 +71,20 @@ const post_userIndex = async (req, res) => {
   }
 };
 
+const post_contentType = async (req, res) => {
+  try {
+    const posts = await Post.find({ contentType: req.params.contentType }).sort(
+      {
+        createdAt: -1,
+      }
+    );
+    res.json(posts);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server error");
+  }
+};
+
 const post_details = async (req, res) => {
   try {
     const post = await Post.findById(req.params.id);
@@ -290,6 +304,7 @@ module.exports = {
   post_create,
   post_index,
   post_userIndex,
+  post_contentType,
   post_details,
   post_update,
   post_delete,

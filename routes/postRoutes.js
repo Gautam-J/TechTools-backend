@@ -32,6 +32,11 @@ router.get("/index", postController.post_index);
 // @access Public
 router.get("/user/:id", postController.post_userIndex);
 
+// @route  GET api/posts/:contentType
+// @desc   Get all posts by contentType
+// @access Public
+router.get("/:contentType", postController.post_contentType);
+
 // @route  GET api/posts/:id
 // @desc   Get post by Id
 // @access Public
