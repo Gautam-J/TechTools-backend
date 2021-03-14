@@ -2,7 +2,7 @@
 
 REST API for TechTools using MongoDB, Express, Node.js
 
-Hosted [here](https://limitless-scrubland-55173.herokuapp.com/)
+Hosted [here](https://salty-cove-54407.herokuapp.com/)
 
 ## Setup
 
