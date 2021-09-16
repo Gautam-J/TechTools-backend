@@ -1,5 +1,6 @@
 const express = require("express");
 const morgan = require("morgan");
+const cors = require("cors");
 const connectToDB = require("./config/db");
 
 const app = express();
@@ -12,6 +13,8 @@ connectToDB();
 app.use(morgan("dev"));
 // parse incoming JSON payloads and convert it to Js Objects
 app.use(express.json());
+// Cross-Origin
+app.use(cors());
 
 // default empty route to check API
 app.get("/", (req, res) => {
